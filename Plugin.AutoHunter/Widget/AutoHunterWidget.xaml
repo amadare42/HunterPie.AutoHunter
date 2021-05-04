@@ -1,0 +1,188 @@
+﻿<gui:Widget x:Name="GrinderWidgetContainerWnd" x:Class="Plugin.AutoHunter.Widget.AutoHunterWidget"
+            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+            xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+            xmlns:gui="clr-namespace:HunterPie.GUI;assembly=HunterPie.UI"
+            xmlns:system="clr-namespace:System;assembly=mscorlib"
+            xmlns:converters="clr-namespace:HunterPie.UI.Infrastructure.Converters;assembly=HunterPie.UI"
+            MinHeight="69" WindowStyle="None" AllowsTransparency="True" ShowInTaskbar="False" Topmost="True"
+            ResizeMode="NoResize"
+            MouseDown="OnMouseDown" MouseWheel="OnMouseWheel" SizeToContent="Height"
+            SizeChanged="OnSizeChanged"
+            Style="{StaticResource OVERLAY_WIDGET_STYLE}"
+            mc:Ignorable="d"
+            Width="320"
+            d:DesignHeight="450" d:DesignWidth="800">
+    <Window.Resources>
+        <system:Double x:Key="LogDismissDistance">300</system:Double>
+        <DrawingImage x:Key="TimerImg">
+            <DrawingImage.Drawing>
+                <DrawingGroup>
+                    <GeometryDrawing Brush="WhiteSmoke"
+                                     Geometry="m77.08 28.577 5.748-5.748-5.656-5.658-6.149 6.149a39.747 39.747 0 0 0 -19.023-7.12v-8.2h8v-8h-24v8h8v8.2a39.747 39.747 0 0 0 -19.023 7.12l-6.149-6.149-5.656 5.658 5.748 5.748a40 40 0 1 0 58.16 0zm-29.08 59.423a32 32 0 1 1 32-32 32.036 32.036 0 0 1 -32 32z" />
+                    <GeometryDrawing Brush="WhiteSmoke" Geometry="m48 32v24h-24a24 24 0 1 0 24-24z" />
+                </DrawingGroup>
+            </DrawingImage.Drawing>
+        </DrawingImage>
+    </Window.Resources>
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="0"
+                      CornerRadius="0"
+                      GlassFrameThickness="5"
+                      ResizeBorderThickness="0,0,5,0"
+                      UseAeroCaptionButtons="False" />
+    </WindowChrome.WindowChrome>
+    <Grid>
+        <Grid Background="#7F000000" Margin="0,0,0,10">
+            <Image Width="{DynamicResource LogDismissDistance}" VerticalAlignment="Top" Opacity="0.5" Margin="-4,0"
+                   Source="pack://siteoforigin:,,,/HunterPie.Resources/UI/HarvestBox/HarvestBoxTopTexture.png"
+                   Stretch="Uniform" />
+            <TextBlock x:Name="HarvestBoxTitle" Text="AUTO HUNTER" Opacity="0.8" Foreground="WhiteSmoke"
+                       Padding="0,12,0,0" Height="29" VerticalAlignment="Top" FontSize="16" TextAlignment="Center"
+                       FontFamily="Roboto" Margin="0,3,0,0" />
+
+            <StackPanel x:Name="Container" VerticalAlignment="Top" Margin="5,40,5,10">
+
+                <!--state & hotkeys-->
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <TextBlock Opacity="0.8" Foreground="WhiteSmoke"
+                               Text="{Binding ElementName=GrinderWidgetContainerWnd, Path=WidgetState.IsEnabledText}" />
+                    <TextBlock Opacity="0.5" Foreground="WhiteSmoke" Padding="4,0,0,0"
+                               Text="{Binding ElementName=GrinderWidgetContainerWnd, Path=WidgetState.Hotkeys}" />
+                </StackPanel>
+
+                <Separator Opacity=".3" Margin="20,3" />
+
+                <!--phase-->
+                <Border BorderThickness="0,0,0,0" BorderBrush="WhiteSmoke">
+                    <TextBlock Opacity="1" Foreground="WhiteSmoke" HorizontalAlignment="Center"
+                               Text="{Binding ElementName=GrinderWidgetContainerWnd, Path=WidgetState.Phase}" />
+                </Border>
+
+                <Separator Opacity=".3" Margin="20,3" />
+
+                <!--sticky logs-->
+                <ItemsControl ItemsSource="{Binding ElementName=GrinderWidgetContainerWnd, Path=StickyLogEntries}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Opacity="0.9" Foreground="WhiteSmoke" Text="{Binding Path=Text}"
+                                       TextWrapping="Wrap" />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+
+                <Separator Opacity=".3" Margin="20,5" Visibility="{Binding ElementName=GrinderWidgetContainerWnd, 
+                    Converter={converters:LengthToVisibilityConverter WhenEmpty=Collapsed, WhenValues=Visible}, 
+                    Path=LogEntries.Count}"  />
+
+
+                <!--logs-->
+                <ListView ItemsSource="{Binding ElementName=GrinderWidgetContainerWnd, Path=LogEntries}"
+                          Background="Transparent"
+                          BorderThickness="0"
+                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                          HorizontalContentAlignment="Stretch">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="Padding" Value="0" />
+                            <Setter Property="Margin" Value="0" />
+                            <Setter Property="BorderThickness" Value="0" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.RenderTransform>
+                                    <TranslateTransform X="0" Y="0" />
+                                </Grid.RenderTransform>
+                                <Grid.LayoutTransform>
+                                    <ScaleTransform ScaleX="1" ScaleY="1" />
+                                </Grid.LayoutTransform>
+
+                                <Grid.Resources>
+                                    <Style TargetType="Grid">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsOutdated}" Value="True">
+                                                <DataTrigger.EnterActions>
+                                                    <BeginStoryboard>
+                                                        <Storyboard>
+                                                            <DoubleAnimation
+                                                                Storyboard.TargetProperty="(Grid.RenderTransform).(TranslateTransform.X)"
+                                                                From="0" To="{StaticResource LogDismissDistance}"
+                                                                Duration="0:0:0.5">
+                                                                <DoubleAnimation.EasingFunction>
+                                                                    <PowerEase EasingMode="EaseIn" />
+                                                                </DoubleAnimation.EasingFunction>
+                                                            </DoubleAnimation>
+                                                            <DoubleAnimation
+                                                                Storyboard.TargetProperty="(Grid.LayoutTransform).(ScaleTransform.ScaleY)"
+                                                                To="0" Duration="0:0:0.5" BeginTime="0:0:0.5">
+                                                                <DoubleAnimation.EasingFunction>
+                                                                    <PowerEase EasingMode="EaseIn" />
+                                                                </DoubleAnimation.EasingFunction>
+                                                            </DoubleAnimation>
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </DataTrigger.EnterActions>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Grid.Resources>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" MinWidth="4" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <!-- time -->
+                                <TextBlock Text="{Binding DisplayTime}" TextWrapping="Wrap" Foreground="WhiteSmoke"
+                                           Opacity=".8"
+                                           Background="Transparent" />
+
+                                <!-- counter -->
+                                <Border CornerRadius="6" Grid.Column="1" Background="CornflowerBlue" Padding="3,0"
+                                        Margin="2,0" VerticalAlignment="Top" Visibility="{Binding CounterVisibility}">
+                                    <TextBlock Text="{Binding CounterText}" Foreground="WhiteSmoke" />
+                                </Border>
+
+                                <!-- message -->
+                                <TextBlock Text="{Binding DisplayText}" TextWrapping="Wrap" Foreground="WhiteSmoke"
+                                           Grid.Column="2"
+                                           Background="Transparent" />
+
+                                <!-- timer countdown -->
+                                <Grid Grid.Column="3" Visibility="{Binding CountdownVisibility}" Margin="4,0,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock Text="{Binding Countdown}" Foreground="WhiteSmoke"
+                                               Opacity=".8"
+                                               Background="Transparent" Grid.Column="1" />
+                                    <Image Source="{StaticResource TimerImg}" Height="15" Margin="2,0" Grid.Column="0"
+                                           VerticalAlignment="Top" />
+                                </Grid>
+
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackPanel>
+        </Grid>
+
+        <Image Width="{DynamicResource LogDismissDistance}" VerticalAlignment="Bottom" Opacity="0.5"
+               HorizontalAlignment="Center"
+               Source="pack://siteoforigin:,,,/HunterPie.Resources/UI/HarvestBox/HarvestBoxBottomTexture.png"
+               Stretch="Uniform" />
+
+        <TextBlock Text="{Binding ElementName=GrinderWidgetContainerWnd, Path=DesignModeDetails}"
+                   Visibility="{Binding ElementName=GrinderWidgetContainerWnd, Path=DesignModeDetailsVisibility}"
+                   VerticalAlignment="Top" HorizontalAlignment="Left" Width="324"
+                   Style="{StaticResource OVERLAY_DESIGN_MODE_DEBUG}" />
+    </Grid>
+</gui:Widget>

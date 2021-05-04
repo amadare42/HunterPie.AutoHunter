@@ -1,0 +1,62 @@
+﻿<UserControl x:Class="Plugin.AutoHunter.Configuration.UI.ConfigControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:customControls="clr-namespace:HunterPie.GUIControls.Custom_Controls;assembly=HunterPie.UI"
+             DataContext="{Binding RelativeSource={RelativeSource Self}}"
+             Name="PluginSettingsCtrl"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <StackPanel>
+        <customControls:Switcher Text="Enabled by default" 
+                                 ToolTip="Run script after plugin is initialized. Otherwise, Toggle Key should be pressed to enable script execution."
+                                 IsEnabled="{Binding EnabledByDefault, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ElementName=PluginSettingsCtrl}" RestartVisibility="Visible" />
+        <customControls:Switcher Text="Log into console" 
+                                 ToolTip="Duplicate log output to HunterPie console in addition to widget. WARNING: large amount of logs will slow down HunterPie significantly, so they should be manually cleared if this option is enabled." 
+                                 IsEnabled="{Binding LogIntoConsole, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ElementName=PluginSettingsCtrl}" />
+        <customControls:Switcher Text="Group log messages" 
+                                 ToolTip="In widget if messages is the same as one of the last three, add counter to existing one" 
+                                 IsEnabled="{Binding GroupLogMessages, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ElementName=PluginSettingsCtrl}" />
+        <customControls:Switcher Text="Widget always visible" 
+                                 ToolTip="Display widget even if overlay is disabled" 
+                                 IsEnabled="{Binding WidgetAlwaysVisible, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ElementName=PluginSettingsCtrl}" />
+        <customControls:Switcher Text="Auto reload"
+                                 ToolTip="If enabled, if any script in imported three is changed, script will be reloaded."
+                                 IsEnabled="{Binding AutoReloadOnChange, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ElementName=PluginSettingsCtrl}" />
+        <customControls:CHotKey Margin="10, 0" Text="Toggle key" 
+                                ToolTip="Toggle invoking events and injecting input for script. NOTE: this will not terminate already running script"
+                                HotKey="{Binding ToggleKey, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ElementName=PluginSettingsCtrl}" />
+        <customControls:CHotKey Margin="10, 0" Text="Reload key"
+                                ToolTip="Reload running script"
+                                HotKey="{Binding ReloadKey, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ElementName=PluginSettingsCtrl}" />
+        <customControls:FileSelect Label="Entry script"
+                                   Name="FileSelect"
+                                   FileSelectionFilter="*.ts|*.js"
+                                   SelectedPath="{Binding EntryScript, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ElementName=PluginSettingsCtrl}"/>
+        
+        <customControls:MinimalSlider Text="Global delay multiplier" 
+                                      ToolTip="Multiplier to which all script delay times will be multiplied. You can experiment with this value if script acts too fast or too slow."
+                                      Value="{Binding DelayMult, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ElementName=PluginSettingsCtrl}"
+                                      FontFamily="Segoe UI Light"
+                                      Margin="10, 0"
+                                      MinValue="0"
+                                      MaxValue="5"
+                                      MinChange=".1">
+            <customControls:MinimalSlider.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="FontFamily" Value="Segoe UI Light"/>
+                </Style>
+            </customControls:MinimalSlider.Resources>
+        </customControls:MinimalSlider>
+        <customControls:MinimalSlider Text="Global delay offset" 
+                                      ToolTip="Offset (in ms) that will be added to all script delay times. You can experiment with this value if script acts too fast or too slow."
+                                      Value="{Binding DelayOffset, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ElementName=PluginSettingsCtrl}"
+                                      FontFamily="Segoe UI Light"
+                                      Margin="10, 0"
+                                      MinValue="0"
+                                      MaxValue="30000"
+                                      MinChange="1" />
+
+    </StackPanel>
+</UserControl>

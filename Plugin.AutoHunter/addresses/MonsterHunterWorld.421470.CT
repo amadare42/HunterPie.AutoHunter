@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="34">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>17</ID>
+      <Description>"MOUSE_STRUCT"</Description>
+      <LastState Value="1520" RealAddress="AF085D10"/>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>4 Bytes</VariableType>
+      <Address>MonsterHunterWorld.exe+5225938</Address>
+      <Offsets>
+        <Offset>160</Offset>
+      </Offsets>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>19</ID>
+          <Description>"MOUSE_STRUCT_Y"</Description>
+          <LastState Value="540" RealAddress="AF085D14"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>MonsterHunterWorld.exe+5225938</Address>
+          <Offsets>
+            <Offset>164</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>28</ID>
+      <Description>"MOUSE_STRUCT_2"</Description>
+      <LastState Value="1520" RealAddress="AF085D90"/>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>4 Bytes</VariableType>
+      <Address>MonsterHunterWorld.exe+5225938</Address>
+      <Offsets>
+        <Offset>1e0</Offset>
+      </Offsets>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>29</ID>
+          <Description>"MOUSE_STRUCT_2_Y"</Description>
+          <LastState Value="540" RealAddress="AF085D94"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>MonsterHunterWorld.exe+5225938</Address>
+          <Offsets>
+            <Offset>1e4</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>20</ID>
+      <Description>"MENU"</Description>
+      <LastState Value="" RealAddress="00000000"/>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>15</ID>
+          <Description>"MENU_INDEX"</Description>
+          <LastState Value="0" RealAddress="3DE813C4"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>MonsterHunterWorld.exe+5224B80</Address>
+          <Offsets>
+            <Offset>274</Offset>
+            <Offset>28F8</Offset>
+            <Offset>11408</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>16</ID>
+          <Description>"MENU_COL_INDEX"</Description>
+          <LastState Value="0" RealAddress="3DE82BE4"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>MonsterHunterWorld.exe+5224B80</Address>
+          <Offsets>
+            <Offset>1A94</Offset>
+            <Offset>28F8</Offset>
+            <Offset>11408</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>21</ID>
+      <Description>"QUESTBOOK"</Description>
+      <LastState Value="" RealAddress="00000000"/>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>14</ID>
+          <Description>"QUESTBOOK_CATEGORY_INDEX"</Description>
+          <LastState Value="3" RealAddress="107100FE4"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>MonsterHunterWorld.exe+5224B80</Address>
+          <Offsets>
+            <Offset>274</Offset>
+            <Offset>470</Offset>
+            <Offset>143F0</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>18</ID>
+          <Description>"QUESTBOOK_OPENED_MAGIC_NUMBER"</Description>
+          <LastState Value="1038618960" RealAddress="05DCDB28"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>MonsterHunterWorld.exe+5224B80</Address>
+          <Offsets>
+            <Offset>28F8</Offset>
+            <Offset>28</Offset>
+            <Offset>2B8</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>22</ID>
+      <Description>"position?"</Description>
+      <LastState Value="3484,433105" RealAddress="B1FC67E0"/>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>Float</VariableType>
+      <Address>140000000+5073ED0</Address>
+      <Offsets>
+        <Offset>670</Offset>
+        <Offset>c0</Offset>
+        <Offset>50</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>27</ID>
+      <Description>"position?"</Description>
+      <LastState Value="0" RealAddress="B1FC636A"/>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>Float</VariableType>
+      <Address>140000000+5073ED0</Address>
+      <Offsets>
+        <Offset>1fa</Offset>
+        <Offset>c0</Offset>
+        <Offset>50</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>23</ID>
+      <Description>"camera?"</Description>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>Float</VariableType>
+      <Address>EACDD448</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>24</ID>
+      <Description>"(horizontal) yaw Z"</Description>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>Float</VariableType>
+      <Address>EACDD440</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>25</ID>
+      <Description>"(vertical) pitch X"</Description>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>Float</VariableType>
+      <Address>EACDD444</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>26</ID>
+      <Description>"(z) roll Y"</Description>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>Float</VariableType>
+      <Address>EACDD448</Address>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>

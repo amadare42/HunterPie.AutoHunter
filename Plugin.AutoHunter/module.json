@@ -1,0 +1,8 @@
+﻿{
+  "Name": "Plugin.AutoHunter",
+  "DisplayName": "Auto Hunter",
+  "Description": "Playing the game for you; automates some repetative tasks.",
+  "Author": "Amadare",
+  "Version": "$version:Plugin.AutoHunter.dll$",
+  "Dependencies": ["Newtonsoft.Json.dll", "Pather.CSharp.dll"]
+}
