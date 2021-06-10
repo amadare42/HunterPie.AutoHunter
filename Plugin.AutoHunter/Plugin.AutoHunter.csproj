@@ -2,6 +2,10 @@
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
+    <HunterPieMain>E:\Dev\github\HunterPie\HunterPie\bin\Debug\</HunterPieMain>
+    <HunterPieSecondary>E:\Dev\github\HunterPie\HunterPie\bin\Release\</HunterPieSecondary>
+  </PropertyGroup>
+  <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <ExcludeFoldersFromDeployment>bin\ar;bin\cs;bin\de;bin\es;bin\fr;bin\he;bin\hi;bin\it;bin\ja;bin\ko;bin\nl;bin\pl;bin\pt;bin\ru;bin\tr-TR;bin\zh-Hans;bin\zh-Hant\</ExcludeFoldersFromDeployment>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -37,11 +41,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="HunterPie.Core, Version=1.0.5.13, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\..\github\HunterPie\HunterPie\bin\Debug\libs\HunterPie.Core.dll</HintPath>
+      <HintPath>$(HunterPieMain)libs\HunterPie.Core.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="HunterPie.UI, Version=1.0.5.14, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\..\github\HunterPie\HunterPie\bin\Debug\libs\HunterPie.UI.dll</HintPath>
+      <HintPath>$(HunterPieMain)libs\HunterPie.UI.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="mscorlib" />
@@ -128,7 +132,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="addresses\*" CopyToOutputDirectory="PreserveNewest" />
-    <Content Include="build\Download-HunterPie.ps1" />
     <Content Include="build\Update-AssemblyVersion.ps1" />
     <Content Include="build\Update-ModuleJson.ps1" />
     <None Include="icon.png">
@@ -153,13 +156,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-         Other similar extension points exist, see Microsoft.Common.targets.
-    <Target Name="BeforeBuild">
-    </Target>
-    <Target Name="AfterBuild">
-    </Target>
-    -->
+  
   <PropertyGroup>
     <PreBuildEvent>
       powershell.exe -ExecutionPolicy Bypass "$(ProjectDir)build\Update-AssemblyVersion.ps1" -path '$(ProjectDir)Properties\AssemblyInfo.cs'
@@ -168,20 +165,14 @@
     <PostBuildEvent>
       powershell.exe -ExecutionPolicy Bypass "$(ProjectDir)build\Update-ModuleJson.ps1" -root '$(TargetDir)'
       if not %errorlevel% == 0 exit %errorlevel%
-      robocopy "$(ProjectDir)bin\Debug" "E:\Dev\github\HunterPie\HunterPie\bin\Debug\Modules\Plugin.AutoHunter" /xf "script.js" /s /njh
+      robocopy "$(ProjectDir)bin\Debug" "$(HunterPieMain)\Modules\Plugin.AutoHunter" /xf "script.js" /s /njh
 
+      IF "$(HunterPieSecondary)" == "" exit 0
       powershell.exe -ExecutionPolicy Bypass "$(ProjectDir)build\Update-ModuleJson.ps1" -root '$(TargetDir)'
       if not %errorlevel% == 0 exit %errorlevel%
-      robocopy "$(ProjectDir)bin\Debug" "E:\Dev\github\HunterPie\HunterPie\bin\Release\Modules\Plugin.AutoHunter" /xf "script.js" /s /njh
+      robocopy "$(ProjectDir)bin\Debug" "$(HunterPieSecondary)\Modules\Plugin.AutoHunter" /xf "script.js" /s /njh
       exit 0
     </PostBuildEvent>
-    <!--    <PostBuildEvent>-->
-    <!--      powershell.exe -ExecutionPolicy Bypass "$(ProjectDir)build\Update-ModuleJson.ps1" -root '$(TargetDir)' -dllName '$(TargetFileName)'-->
-    <!--      if not %errorlevel% == 0 exit %errorlevel%-->
-    <!--      copy $(TargetDir)$(TargetFileName) "M:\HunterPie\Modules\Plugin.MonsterSizeBar\Plugin.MonsterSizeBar.dll"-->
-    <!--      copy $(TargetDir)DefaultTheme.xaml "M:\HunterPie\Modules\Plugin.MonsterSizeBar\DefaultTheme.xaml"-->
-    <!--      copy $(TargetDir)module.json "M:\HunterPie\Modules\Plugin.MonsterSizeBar\module.json"-->
-    <!--      if not %errorlevel% == 0 exit %errorlevel%-->
-    <!--    </PostBuildEvent>-->
   </PropertyGroup>
+  
 </Project>
